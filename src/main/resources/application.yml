@@ -1,0 +1,38 @@
+server:
+  port: 8091
+
+spring:
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY:${GOOGLE_API_KEY:AQ.Ab8RN6KRmyhFXXJTz6x4OHMowok9N_dRwvC9ztDKGXy4HGpGgQ}}
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: gemma3:4b
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/pharmacy_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 2s
+      quiet-period: 1s
+    livereload:
+      enabled: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:local-pharmacy-jwt-secret-key-change-before-production-2026}
+    ttl-minutes: ${JWT_TTL_MINUTES:480}
