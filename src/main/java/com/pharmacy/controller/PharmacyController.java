@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = { "http://localhost:4200", "http://127.0.0.1:4200" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PharmacyController {
     private final PharmacyService pharmacy;
     private final AiPharmacistService aiPharmacist;
@@ -32,6 +32,11 @@ public class PharmacyController {
         this.pharmacy = pharmacy;
         this.aiPharmacist = aiPharmacist;
         this.masterMedicineService = masterMedicineService;
+    }
+
+    @GetMapping("/health")
+    public java.util.Map<String, String> health() {
+        return java.util.Map.of("status", "UP", "service", "Pharmacy Management System Backend");
     }
 
     @GetMapping("/medicines/master/search")
